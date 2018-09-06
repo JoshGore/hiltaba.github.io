@@ -1,0 +1,1 @@
+https://www.weekendnotes.com/im/008/05/kimba-silo-mural11.jpg

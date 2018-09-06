@@ -3,18 +3,49 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- boilerplate from mapbox
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    -->
+    <title>Welcome to Hiltaba</title>
 
     <!-- Bootstrap CSS -->
     <!--
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/main.css">
     -->
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
+    <!-- boilerplate from mapbox
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+    -->
 
-    <title>Welcome to Hiltaba</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!--
+        https://www.w3schools.com/howto/howto_css_full_page.asp  
+    -->
+	<style>
+		body, html {
+			height: 100%;
+		}
+		#intro { 
+			/* The image used */
+			background-image: url("https://www.walkingsa.org.au/wp-content/uploads/2015/04/Hiltaba-Walking-Trails-10.jpg");
+
+			/* Full height */
+			height: 100%; 
+
+			/* Center and scale the image nicely */
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+	</style>
+    <div class="container-fluid" id="intro">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: rgba(0,0,0,0.5)">
         <a class="navbar-brand" href="#">Welcome to Hiltaba!</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -33,15 +64,37 @@
             </ul>
         </div>
     </nav>
-    <div class="container">
-        <div class="row">
-        <div class="col-sm">
-            <iframe src="https://embed.alpacamaps.com/journey/c2b75b6c-a99e-11e8-a4a7-024bc0398b11/default" width="100%" height="650" style="border:1px #d5d5d5 solid;min-height:300px" allowFullScreen></iframe>
-            <iframe src="https://embed.alpacamaps.com/journey/4b21901b-a99c-11e8-a4a7-024bc0398b11/default" width="100%" height="650" style="border:1px #d5d5d5 solid;min-height:300px" allowFullScreen></iframe> </div>
     </div>
-        <!-- Content here -->
+    <div class="container-fluid">
+        <!--
+        <h1>Drop In on your next trip!</h1>
+        <iframe src="https://embed.alpacamaps.com/journey/53a661dc-b17d-11e8-a4a7-024bc0398b11/default" width="100%" height="800" style="border:1px #d5d5d5 solid;min-height:300px" allowFullScreen></iframe>
+        -->
+        <iframe src="https://embed.alpacamaps.com/journey/53a661dc-b17d-11e8-a4a7-024bc0398b11/default"style="border:1px #d5d5d5 solid; min-height:300px; width:100%; height:80vh" allowFullScreen></iframe>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm">
+                <div id='map' style='width: 100%; height: 80vh;'></div>
+                <script>
+                    mapboxgl.accessToken = 'pk.eyJ1Ijoiam9zaGciLCJhIjoiTFBBaE1JOCJ9.-BaGpeSYz4yPrpxh1eqT2A';
+                    const map = new mapboxgl.Map({
+                        container: 'map',
+                        style: 'mapbox://styles/joshg/cjlpww1vk8jp72snq3g3g9l90',
+                        center: [135.248, -32.229],
+                        zoom: 10.0
+                    });
+                </script>
+                <!-- Content here -->
+            </div>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<body>
+
+
 </body>
+</html>
+
