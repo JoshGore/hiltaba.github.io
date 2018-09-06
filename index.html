@@ -26,56 +26,145 @@
 <body>
     <!--
         https://www.w3schools.com/howto/howto_css_full_page.asp  
+        https://startbootstrap.com/snippets/video-header/
     -->
 	<style>
 		body, html {
 			height: 100%;
 		}
-		#intro { 
+
+		.dam { 
 			/* The image used */
-			background-image: url("https://www.walkingsa.org.au/wp-content/uploads/2015/04/Hiltaba-Walking-Trails-10.jpg");
+			background-image: url("/assets/images/dam/tom_hill_dam_cropped.jpg");
 
 			/* Full height */
-			height: 100%; 
+			/* height: 100%; */
+			height: 75%;
 
 			/* Center and scale the image nicely */
 			background-position: center;
 			background-repeat: no-repeat;
 			background-size: cover;
 		}
+
+		header {
+		  position: relative;
+		  background-color: black;
+		  height: 75vh;
+		  min-height: 25rem;
+		  width: 100%;
+		  overflow: hidden;
+		}
+
+		header video {
+		  position: absolute;
+		  top: 50%;
+		  left: 50%;
+		  min-width: 100%;
+		  min-height: 100%;
+		  width: auto;
+		  height: auto;
+		  z-index: 0;
+		  -ms-transform: translateX(-50%) translateY(-50%);
+		  -moz-transform: translateX(-50%) translateY(-50%);
+		  -webkit-transform: translateX(-50%) translateY(-50%);
+		  transform: translateX(-50%) translateY(-50%);
+		}
+
+		header .container {
+		  position: relative;
+		  z-index: 2;
+		}
+
+		header .overlay {
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  height: 100%;
+		  width: 100%;
+		  background-color: black;
+		  opacity: 0.5;
+		  z-index: 1;
+		}
+
+		@media (pointer: coarse) and (hover: none) {
+		  header {
+			background: url('/assets/images/shearers_quaters/stars_image.JPG') black no-repeat center center scroll;
+		  }
+		  header video {
+			display: none;
+		  }
+		}
 	</style>
-    <div class="container-fluid" id="intro">
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: rgba(0,0,0,0.5)">
-        <a class="navbar-brand" href="#">Welcome to Hiltaba!</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/drives">Nature Drives</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="/walks">Nature Walks</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="/info">Info</a>
-                </li>
-            </ul>
+    <header>
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: rgba(0,0,0,0.5)">
+                <!--
+                <a class="navbar-brand" href="#">Welcome to Hiltaba!</a>
+                -->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#visit">Itinerary</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#map">Map</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav justify-content-end">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/drives">Nature Drives</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/walks">Nature Walks</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/info">Info</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
-    </nav>
-    </div>
-    <div class="container-fluid">
+        <div class="overlay"></div>
+        <video id="stars" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+            <source src="assets/images/shearers_quaters/stars_small_timelapse_fade.mp4" type="video/mp4">
+        </video>
+      <div class="container h-100">
+        <div class="d-flex text-center h-100">
+          <div class="my-auto w-100 text-white">
+            <h1 class="display-3">Welcome to Hiltaba!</h1>
+            <h2>Drop in to Hiltaba Nature Reserve</h2>
+          </div>
+        </div>
+      </div>
+        <!--
+        <script>
+            var vid = document.getElementById("stars");
+            vid.playbackRate = 0.5;
+        </script>
+        -->
+    </header>
+    <div class="container-fluid ">
         <!--
         <h1>Drop In on your next trip!</h1>
         <iframe src="https://embed.alpacamaps.com/journey/53a661dc-b17d-11e8-a4a7-024bc0398b11/default" width="100%" height="800" style="border:1px #d5d5d5 solid;min-height:300px" allowFullScreen></iframe>
         -->
-        <iframe src="https://embed.alpacamaps.com/journey/53a661dc-b17d-11e8-a4a7-024bc0398b11/default"style="border:1px #d5d5d5 solid; min-height:300px; width:100%; height:80vh" allowFullScreen></iframe>
-    </div>
-    <div class="container-fluid">
+        <div class="row">
+            <!--
+            <a id="visit" class="anchor" id="top" style="display: block; position: relative; top: -60px; visibility: hidden;"></a>
+            -->
+            <div id="visit" class="col py-3" style="height: 100vh">
+                <div class="embed-responsive" style="width: 100%; height: 100%">
+                    <iframe class="embed-responsive-item" src="https://embed.alpacamaps.com/journey/53a661dc-b17d-11e8-a4a7-024bc0398b11/default" style="border:1px #d5d5d5 solid; min-height:300px; width:100%" allowFullScreen></iframe>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm">
-                <div id='map' style='width: 100%; height: 80vh;'></div>
+                <div id='map' style='width: 100%; height: 100vh;'></div>
                 <script>
                     mapboxgl.accessToken = 'pk.eyJ1Ijoiam9zaGciLCJhIjoiTFBBaE1JOCJ9.-BaGpeSYz4yPrpxh1eqT2A';
                     const map = new mapboxgl.Map({
@@ -85,9 +174,10 @@
                         zoom: 10.0
                     });
                 </script>
-                <!-- Content here -->
             </div>
         </div>
+    </div>
+    <div class="container-fluid">
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
