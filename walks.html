@@ -10,34 +10,149 @@
     <link rel="stylesheet" href="/css/main.css">
     -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<style>
+		body, html {
+			height: 100%;
+		}
+
+		.dam { 
+			/* The image used */
+			background-image: url("/assets/images/dam/tom_hill_dam_cropped.jpg");
+
+			/* Full height */
+			/* height: 100%; */
+			height: 75%;
+
+			/* Center and scale the image nicely */
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+
+		.star_background { 
+			/* The image used */
+			background-image: url("/assets/images/shearers_quaters/stars_image.JPG");
+
+			/* Full height */
+			/* height: 100%; */
+			height: 75%;
+
+			/* Center and scale the image nicely */
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+
+		header {
+		  position: relative;
+		  background-color: black;
+		  height: 75vh;
+		  min-height: 25rem;
+		  width: 100%;
+		  overflow: hidden;
+		}
+
+		header video {
+		  position: absolute;
+		  top: 50%;
+		  left: 50%;
+		  min-width: 100%;
+		  min-height: 100%;
+		  width: auto;
+		  height: auto;
+		  z-index: 0;
+		  -ms-transform: translateX(-50%) translateY(-50%);
+		  -moz-transform: translateX(-50%) translateY(-50%);
+		  -webkit-transform: translateX(-50%) translateY(-50%);
+		  transform: translateX(-50%) translateY(-50%);
+		}
+
+		header .container {
+		  position: relative;
+		  z-index: 2;
+		}
+
+		header .overlay {
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  height: 100%;
+		  width: 100%;
+		  background-color: black;
+		  opacity: 0.5;
+		  z-index: 1;
+		}
+
+		@media (pointer: coarse) and (hover: none) {
+		  header {
+			background: url('/assets/images/shearers_quaters/stars_image.JPG') black no-repeat center center scroll;
+		  }
+		  header video {
+			display: none;
+		  }
+		}
+	</style>
 
     <title>Welcome to Hiltaba</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Welcome to Hiltaba!</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/drives">Nature Drives</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/walks">Nature Walks</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/info">Info</a>
-                </li>
-            </ul>
+    <header>
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: rgba(0,0,0,0.5)">
+                <a class="navbar-brand" href="#">
+                    <img src="/assets/images/logo/logo.svg" height="30" alt="">
+                </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#visit">Itinerary</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#map">Map</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav justify-content-end">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/drives">Nature Drives</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/accommodation">Accommodation</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
-    </nav>
-    <div class="container">
+        <div class="overlay"></div>
+        <video poster="/assets/images/shearers_quaters/stars_projected_cropped_wmargin_small.jpg" id="stars" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+            <source src="/assets/images/shearers_quaters/stars_small_timelapse_fade_highly_compressed.mp4" type="video/mp4">
+        </video>
+      <div class="container h-100">
+        <div class="d-flex text-center h-100">
+          <div class="my-auto w-100 text-white">
+            <h1 class="display-3">Walks at Hiltaba</h1>
+            <h2>Get close to nature on one of our hiking trails</h2>
+          </div>
+        </div>
+      </div>
+        <!--
+        <script>
+            var vid = document.getElementById("stars");
+            vid.playbackRate = 0.5;
+        </script>
+        -->
+    </header>
+    <div class="container-fluid">
         <div class="row">
-        <div class="col-sm">
-            <iframe width="100%" height="500px" src="https://embed-v1.mapillary.com/embed?version=1&filter=%5B%22all%22%5D&map_filter=%5B%22all%22%5D&map_style=mapbox_streets&image_key=Q3cKaTWTnpKPBCYeFTnA7w&x=0.5&y=0.5&client_id=VlY1Y1BMVEttZmpBd0hManFIcnVKdzo1MDdjZGExZDMyMTE2MDdi&style=classic" frameborder="0"></iframe>
-    </div>
+            <div class="col py-3" style="height: 100vh">
+                <iframe width="100%" height="100%" src="https://embed-v1.mapillary.com/embed?version=1&filter=%5B%22all%22%5D&map_filter=%5B%22all%22%5D&map_style=mapbox_streets&image_key=Q3cKaTWTnpKPBCYeFTnA7w&x=0.5&y=0.5&client_id=VlY1Y1BMVEttZmpBd0hManFIcnVKdzo1MDdjZGExZDMyMTE2MDdi&style=classic" frameborder="0"></iframe>
+            </div>
+        </div>
         <!-- Content here -->
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
