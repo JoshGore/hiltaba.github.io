@@ -8,10 +8,13 @@
     -->
     <title>Welcome to Hiltaba</title>
 
-    <!-- Bootstrap CSS -->
+    <!-- Mapbox -->
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
+
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
+
     <!-- boilerplate from mapbox
     <style>
         body { margin:0; padding:0; }
@@ -159,28 +162,50 @@
         -->
     </header>
     <div class="container-fluid ">
-        <div class="row">
+        <!--
+        <div class="row pt-3 mb-3" style="margin-top: -65px">
+        -->
+        <div class="row pt-3 mb-3">
             <!--
             <a id="visit" class="anchor" id="top" style="display: block; position: relative; top: -60px; visibility: hidden;"></a>
             -->
-            <div id="visit" class="col py-3" style="height: 100vh">
+            <div id="visit" class="col" style="height: 100vh; padding-top: 65px;">
                 <div class="embed-responsive" style="width: 100%; height: 100%">
-                    <iframe class="embed-responsive-item" src="https://embed.alpacamaps.com/journey/53a661dc-b17d-11e8-a4a7-024bc0398b11/default" style="border:1px #d5d5d5 solid; min-height:300px; width:100%" allowFullScreen></iframe>
+                    <iframe class="embed-responsive-item" src="https://embed.alpacamaps.com/journey/53a661dc-b17d-11e8-a4a7-024bc0398b11/default" style="min-height:300px; width:100%" allowFullScreen></iframe>
                 </div>
             </div>
         </div>
+        <!--
+        <div class="row" style="margin-top: -65px;">
+        -->
         <div class="row">
-            <div class="col">
-                <div id='map' style='width: 100%; height: 100vh;'></div>
-                <script>
-                    mapboxgl.accessToken = 'pk.eyJ1Ijoiam9zaGciLCJhIjoiTFBBaE1JOCJ9.-BaGpeSYz4yPrpxh1eqT2A';
-                    const map = new mapboxgl.Map({
-                        container: 'map',
-                        style: 'mapbox://styles/joshg/cjlpww1vk8jp72snq3g3g9l90',
-                        center: [135.248, -32.229],
-                        zoom: 10.0
-                    });
-                </script>
+            <div class="col" style="height: 100vh">
+                <div id='map' style='height: 100%; padding-top: 65px;'>
+                    <script>
+                        mapboxgl.accessToken = 'pk.eyJ1Ijoiam9zaGciLCJhIjoiTFBBaE1JOCJ9.-BaGpeSYz4yPrpxh1eqT2A';
+                        var map = new mapboxgl.Map({
+                            container: 'map',
+                            style: 'mapbox://styles/joshg/cjlpww1vk8jp72snq3g3g9l90',
+                            center: [135.248, -32.229],
+                            zoom: 10.0
+                        });
+                        map.on('load', function() {
+                            map.addSource('satellite', {
+                                "type": 'raster',
+                                "url": 'mapbox://mapbox.satellite',
+                                "tileSize": 256
+                            });
+                            map.addLayer({
+                                'id': 'satellite',
+                                'type': 'raster',
+                                'source': 'satellite',
+                                'layout': {
+                                    'visibility': 'visible',
+                                },
+                            })
+                        })
+                    </script>
+                </div>
             </div>
         </div>
     </div>
