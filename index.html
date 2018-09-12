@@ -193,22 +193,64 @@
                             zoom: 10.0
                         });
                         map.on('load', function() {
-                            map.addSource('satellite', {
-                                "type": 'raster',
-                                "url": 'mapbox://mapbox.satellite',
-                                "tileSize": 256
-                            });
-                            map.addLayer({
-                                'id': 'satellite',
-                                'type': 'raster',
-                                'source': 'satellite',
-                                'layout': {
-                                    'visibility': 'visible',
-                                },
-                            })
+                            map.setStyle('mapbox://styles/mapbox/satellite-streets-v9')
                         })
                     </script>
                 </div>
+                <style>
+                    .mapMenu {
+                        /* 100% Full-height */
+                        height: 100%; 
+                        /* 0 width - change this with JavaScript */
+                        width: 0; 
+                        /* Stay on top */
+                        position: absolute;
+                        z-index: 1;
+                        /* Stay at the top */
+                        top: 0;
+                        right: 0;
+                        /*
+                        left: 0;
+                        */
+                        background-color: rgba(0,0,0,0.5); /* Black*/
+                        overflow-x: hidden; /* Disable horizontal scroll */
+                        padding-top: 60px; /* Place content 60px from the top */
+                        transition: 0.3s; /* 0.5 second transition effect to slide in the mapMenu */
+                    }
+                </style>
+                <div>
+                    <button type="button" class="btn btn-dark" onclick="openNav()" id="menuShow" style="position: absolute; top: 65px; right: 0;">Menu</button>
+                </div>
+                <div id="mainMapMenu" class="mapMenu">
+                    <div class="p-2">
+                    <a href="javascript:void(0)" class="closebtn text-white" style="font-size: 36px;" onclick="closeNav()">&times;</a>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                        <label class="custom-control-label text-white" for="customRadio1">Outdoors</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                        <label class="custom-control-label text-white" for="customRadio2">Satellite</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                        <label class="custom-control-label text-white" for="customCheck1">Mobile Reception</label>
+                    </div>
+                    </div>
+                </div>
+                <script>
+                    /* Set the width of the side navigation to 250px */
+                    function openNav() {
+                        document.getElementById("menuShow").hidden = true;
+                        document.getElementById("mainMapMenu").style.width = "250px";
+                    }
+
+                    /* Set the width of the side navigation to 0 */
+                    function closeNav() {
+                        document.getElementById("mainMapMenu").style.width = "0";
+                        document.getElementById("menuShow").hidden = false;
+                    }
+                </script>
             </div>
         </div>
     </div>
