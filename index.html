@@ -238,6 +238,24 @@
                             url: 'mapbox://joshg.212mgjl9'
                         },
                         "source-layer": "data_filtered_trimmed_mincol_-6s5qwg",
+                        "paint": {
+                            "heatmap-opacity": 0.5,
+                            'heatmap-weight': {
+                                "property": "rssi_norm",
+                                // "type": "linear" 
+                                "stops": [
+                                    [0, 0],
+                                    [1, 100]
+                                ]
+                            },
+                            "heatmap-radius": {
+                                "stops": [
+                                    [10, 1],
+                                    [15, 10],
+                                    [22, 100]
+                                ]
+                            }
+                        }
                     });
                     receptionState.visible = true;
                     receptionState.loaded = true;
