@@ -179,17 +179,17 @@
                 <div id="mainMapMenu" class="mapMenu">
                     <div class="p-2">
                     <a href="javascript:void(0)" class="closebtn text-white" style="font-size: 36px;" onclick="closeNav()">&times;</a>
-                    <div class="custom-control custom-radio" onclick="map.setStyle('mapbox://styles/mapbox/outdoors-v9')">
+                    <div class="custom-control custom-radio">
                         <input type="radio" id="outdoors" name="layer" class="custom-control-input" checked="checked">
-                        <label class="custom-control-label text-white" for="outdoors">Outdoors</label>
+                        <label class="custom-control-label text-white" for="outdoors">Map</label>
                     </div>
-                    <div class="custom-control custom-radio" onclick="map.setStyle('mapbox://styles/mapbox/satellite-streets-v9')">
+                    <div class="custom-control custom-radio">
                         <input type="radio" id="satellite" name="layer" class="custom-control-input">
                         <label class="custom-control-label text-white" for="satellite">Satellite</label>
                     </div>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="reception">
-                        <label class="custom-control-label text-white" for="reception">Mobile Reception</label>
+                        <label class="custom-control-label text-white" for="reception">Telstra Reception</label>
                     </div>
                     </div>
                 </div>
@@ -222,14 +222,29 @@
         mapboxgl.accessToken = 'pk.eyJ1Ijoiam9zaGciLCJhIjoiTFBBaE1JOCJ9.-BaGpeSYz4yPrpxh1eqT2A';
         var map = new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/joshg/cjlpww1vk8jp72snq3g3g9l90',
+            style: 'mapbox://styles/joshg/cjm0bck9r74ji2rlenm6daoz8',
             center: [135.248, -32.229],
             zoom: 10.0
         });
         // specify sources
         map.on('load', function () {
+            document.getElementById("satellite").addEventListener("click", function() {
+                map.setLayoutProperty("mapbox-satellite", 'visibility', 'visible');
+            });
+            document.getElementById("outdoors").addEventListener("click", function() {
+                map.setLayoutProperty("mapbox-satellite", 'visibility', 'none');
+                // map.setStyle('mapbox://styles/joshg/cjlpww1vk8jp72snq3g3g9l90');
+            });
             document.getElementById("reception").addEventListener("click", function() {
-                if (!receptionState.loaded && !receptionState.visible) {
+                var visibility = map.getLayoutProperty("reception", "visibility");
+                if (visibility == 'none') {
+                    map.setLayoutProperty("reception", "visibility", 'visible');
+                }
+                else {
+                    map.setLayoutProperty("reception", "visibility", 'none');
+                }
+                /*
+                if (!map.style._layers.reception) {
                     map.addLayer({
                         "id": "reception",
                         "type": "heatmap",
@@ -268,6 +283,8 @@
                     map.setLayoutProperty("reception", 'visibility', 'none');
                     receptionState.visible = false;
                 };
+                console.log();
+                */
             });
         });
     </script>
