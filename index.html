@@ -228,21 +228,57 @@
         });
         // specify sources
         map.on('load', function () {
-            document.getElementById("satellite").addEventListener("click", function() {
-                map.setLayoutProperty("mapbox-satellite", 'visibility', 'visible');
-            });
-            document.getElementById("outdoors").addEventListener("click", function() {
-                map.setLayoutProperty("mapbox-satellite", 'visibility', 'none');
-                // map.setStyle('mapbox://styles/joshg/cjlpww1vk8jp72snq3g3g9l90');
-            });
-            document.getElementById("reception").addEventListener("click", function() {
-                var visibility = map.getLayoutProperty("reception", "visibility");
-                if (visibility == 'none') {
-                    map.setLayoutProperty("reception", "visibility", 'visible');
+            var toggleLayers = {reception};
+            toggleLayers.reception.visibility = "none";
+
+            function updateToggleState() {
+                Object.keys(toggleLayers).forEach(function(key) {
+                    toggleLayers[key].visibility = map.getLayoutProperty(key ,"visibility");
+                });
+            }
+
+            function applyToggleState() {
+                Object.keys(toggleLayers).forEach(function(key) {
+                    map.setLayoutProperty(key, "visibility", toggleLayers[key].visibility);
+                });
+            }
+
+            function applyVisibility(visibility){
+                layerIds.forEach(function(layerId) {
+                    map.setLayoutProperty(layerId, 'visibility', visibility);
+                });
+            }
+            
+            function toggleVisibility(layer) {
+                if (map.getLayoutProperty(layer, 'visibility') == 'none') {
+                    map.setLayoutProperty(layer, "visibility", "visible");
                 }
                 else {
-                    map.setLayoutProperty("reception", "visibility", 'none');
+                    map.setLayoutProperty(layer, "visibility", "none");
                 }
+            }
+
+            var layerIds = map.getStyle().layers.map(function(layer) {
+                return layer.id;
+            });
+
+            // add event listeners to menu
+            document.getElementById("satellite").addEventListener("click", function() {
+                updateToggleState();
+                applyVisibility("none");
+                map.setLayoutProperty("mapbox-satellite", 'visibility', 'visible');
+                applyToggleState();
+            });
+
+            document.getElementById("outdoors").addEventListener("click", function() {
+                updateToggleState();
+                applyVisibility("visible");
+                map.setLayoutProperty("mapbox-satellite", 'visibility', 'none');
+                applyToggleState();
+            });
+
+            document.getElementById("reception").addEventListener("click", function() {
+                toggleVisibility("reception");
             });
         });
     </script>
