@@ -11,6 +11,10 @@
     <!-- Mapbox -->
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
 
+    <!-- Mapillary viewer -->
+    <script src='https://unpkg.com/mapillary-js@2.12.1/dist/mapillary.min.js'></script>
+    <link href='https://unpkg.com/mapillary-js@2.12.1/dist/mapillary.min.css' rel='stylesheet' />
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
@@ -26,69 +30,64 @@
 			height: 100%;
 		}
 
-		.dam { 
-			background-image: url("/assets/images/dam/tom_hill_dam_cropped.jpg");
-			height: 75%;
-			background-position: center;
-			background-repeat: no-repeat;
-			background-size: cover;
-		}
-
 		.star_background { 
 			background-image: url("/assets/images/shearers_quaters/stars_image.JPG");
 			height: 75%;
+            background-attachment: fixed;
 			background-position: center;
 			background-repeat: no-repeat;
 			background-size: cover;
 		}
 
 		header {
-		  position: relative;
-		  background-color: black;
-		  height: 75vh;
-		  min-height: 25rem;
-		  width: 100%;
-		  overflow: hidden;
+            position: relative;
+            background-color: black;
+            height: 75vh;
+            min-height: 25rem;
+            width: 100%;
+            overflow: hidden;
 		}
 
 		header video {
-		  position: absolute;
-		  top: 50%;
-		  left: 50%;
-		  min-width: 100%;
-		  min-height: 100%;
-		  width: auto;
-		  height: auto;
-		  z-index: 0;
-		  -ms-transform: translateX(-50%) translateY(-50%);
-		  -moz-transform: translateX(-50%) translateY(-50%);
-		  -webkit-transform: translateX(-50%) translateY(-50%);
-		  transform: translateX(-50%) translateY(-50%);
+            /* position: absolute; */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 0;
+            -ms-transform: translateX(-50%) translateY(-50%);
+            -moz-transform: translateX(-50%) translateY(-50%);
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
 		}
 
 		header .container {
-		  position: relative;
-		  z-index: 2;
+            position: relative;
+            z-index: 2;
 		}
 
 		header .overlay {
-		  position: absolute;
-		  top: 0;
-		  left: 0;
-		  height: 100%;
-		  width: 100%;
-		  background-color: black;
-		  opacity: 0.5;
-		  z-index: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: black;
+            opacity: 0.5;
+            z-index: 1;
 		}
 
 		@media (pointer: coarse) and (hover: none) {
-		  header {
-			background: url('/assets/images/shearers_quaters/stars_image.JPG') black no-repeat center center scroll;
-		  }
-		  header video {
-			display: none;
-		  }
+            header {
+                background: url('/assets/images/shearers_quaters/stars_image.JPG') black no-repeat center center scroll;
+                background-attachment: fixed;
+            }
+            header video {
+                display: none;
+            }
 		}
 	</style>
     <header>
@@ -191,6 +190,10 @@
                         <input type="checkbox" class="custom-control-input" id="reception">
                         <label class="custom-control-label text-white" for="reception">Telstra Reception</label>
                     </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="mapillary">
+                        <label class="custom-control-label text-white" for="mapillary">Mapillary Photos</label>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -226,10 +229,30 @@
             center: [135.248, -32.229],
             zoom: 10.0
         });
+        // var nav = new mapboxgl.NavigationControl();
+        map.addControl(new mapboxgl.NavigationControl(), 'bottom-left');
         // specify sources
         map.on('load', function () {
-            var toggleLayers = {reception};
+            // add mapillary layer
+            map.addLayer({
+                "id": "mapillary",
+                // type so can use custom symbol
+                "type": "circle",
+                "source": {
+                    "type": "vector",
+                    "tiles": ["https://d25uarhxywzl1j.cloudfront.net/v0.1/{z}/{x}/{y}.mvt"],
+                    "minzoom": 14,
+                    "maxzoom": 14
+                },
+                "source-layer": "mapillary-images",
+                "paint": {
+                    "circle-color": "#34AF6E"
+                }
+            });
+            // add menu functions
+            var toggleLayers = {reception, mapillary};
             toggleLayers.reception.visibility = "none";
+            toggleLayers.mapillary.visibility = "none";
 
             function updateToggleState() {
                 Object.keys(toggleLayers).forEach(function(key) {
@@ -279,6 +302,45 @@
 
             document.getElementById("reception").addEventListener("click", function() {
                 toggleVisibility("reception");
+            });
+
+            document.getElementById("mapillary").addEventListener("click", function() {
+                toggleVisibility("mapillary");
+            });
+        });
+        // from mapbox examples
+        // When a click event occurs on a feature in the mapillary layer, open a popup at the
+        // location of the feature, with description HTML from its properties.
+        map.on('click', 'mapillary', function (e) {
+            var coordinates = e.features[0].geometry.coordinates.slice();
+            console.log(e.features[0]);
+            var imagekey = e.features[0].properties.key;
+
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+            // new mapboxgl.Popup()
+            var popup = new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML('<div id="' + imagekey + '" style="width: 640px; height: 480px;"></div>')
+                .addTo(map);
+            mapview = new Mapillary.Viewer(
+                imagekey,
+                'VlY1Y1BMVEttZmpBd0hManFIcnVKdzo1MDdjZGExZDMyMTE2MDdi',
+                imagekey,
+                {
+                    component: {
+                        cover: false,
+                    },
+                }
+            );
+            mapview.on(Mapillary.Viewer.nodechanged, function (node) {
+                var lnglat = [node.latLon.lon, node.latLon.lat];
+                popup.setLngLat(lnglat);
+                console.log(lnglat);
             });
         });
     </script>
