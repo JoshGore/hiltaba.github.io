@@ -252,11 +252,12 @@
                     "circle-color": "#34AF6E"
                 }
             });
-            map.setLayoutProperty("mapillary", "visibility", "none");
+            map.setLayoutProperty("mapillary", "visibility", "visible");
+            map.setLayoutProperty("reception", "visibility", "visible");
             // add menu functions
             var toggleLayers = {reception, mapillary};
-            toggleLayers.reception.visibility = "none";
-            toggleLayers.mapillary.visibility = "none";
+            toggleLayers.reception.visibility = "visible";
+            toggleLayers.mapillary.visibility = "visible";
 
             function updateToggleState() {
                 Object.keys(toggleLayers).forEach(function(key) {
@@ -305,12 +306,12 @@
             });
 
             document.getElementById("reception").addEventListener("click", function() {
-                applyVisibility("visible");
+                // applyVisibility("visible");
                 toggleVisibility("reception");
             });
 
             document.getElementById("mapillary").addEventListener("click", function() {
-                applyVisibility("visible");
+                // applyVisibility("visible");
                 toggleVisibility("mapillary");
             });
         });
