@@ -22,7 +22,7 @@
 </head>
 <body>
     <!--
-        https://www.w3schools.com/howto/howto_css_full_page.asp  
+        https://www.w3schools.com/howto/howto_css_full_page.asp
         https://startbootstrap.com/snippets/video-header/
     -->
     <style>
@@ -30,7 +30,7 @@
             height: 100%;
         }
 
-        .star_background { 
+        .star_background {
             background-image: url("/assets/images/shearers_quaters/stars_image.JPG");
             height: 75%;
             background-attachment: fixed;
@@ -110,6 +110,9 @@
                     </ul>
                     <ul class="navbar-nav justify-content-end">
                         <li class="nav-item">
+                            <a class="nav-link active" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="/drives">Nature Drives</a>
                         </li>
                         <li class="nav-item">
@@ -158,9 +161,9 @@
                 </div>
                 <style>
                     .mapMenu {
-                        height: 100%; 
+                        height: 100%;
                         /* 0 width - change this with JavaScript */
-                        width: 0; 
+                        width: 0;
                         /* Stay on top */
                         position: absolute;
                         z-index: 1;
@@ -272,7 +275,7 @@
                     map.setLayoutProperty(layerId, 'visibility', visibility);
                 });
             }
-            
+
             function toggleVisibility(layer) {
                 if (map.getLayoutProperty(layer, 'visibility') == 'none') {
                     map.setLayoutProperty(layer, "visibility", "visible");
