@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- boilerplate from mapbox
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    -->
+    <title>Welcome to Hiltaba</title>
+
+    <!-- Mapbox -->
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
+
+    <!-- Mapillary viewer -->
+    <script src='https://unpkg.com/mapillary-js@2.12.1/dist/mapillary.min.js'></script>
+    <link href='https://unpkg.com/mapillary-js@2.12.1/dist/mapillary.min.css' rel='stylesheet' />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
+
+</head>
+<body>
+    <!--
+        https://www.w3schools.com/howto/howto_css_full_page.asp
+        https://startbootstrap.com/snippets/video-header/
+    -->
+    <style>
+        body, html {
+            height: 100%;
+        }
+
+        .star_background {
+            background-image: url("/assets/images/shearers_quaters/stars_image.JPG");
+            height: 75%;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        header {
+            position: relative;
+            background-color: black;
+            height: 75vh;
+            min-height: 25rem;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        header video {
+            /* position: absolute; */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 0;
+            -ms-transform: translateX(-50%) translateY(-50%);
+            -moz-transform: translateX(-50%) translateY(-50%);
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        header .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        header .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            /*
+            background-color: black;
+            opacity: 0.5;
+            */
+            z-index: 1;
+        }
+
+        @media (pointer: coarse) and (hover: none) {
+            header {
+                background: url('/assets/images/shearers_quaters/stars_image.JPG') black no-repeat center center scroll;
+                background-attachment: fixed;
+            }
+            header video {
+                display: none;
+            }
+        }
+    </style>
+    <header>
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: rgba(0,0,0,0.5)">
+                <a class="navbar-brand" href="#">
+                    <img src="/assets/images/logo/logo.svg" height="30" alt="">
+                </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#visit">Itinerary</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#map">Map</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav justify-content-end">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/drives">Nature Drives</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/trails">Nature Trails</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/accommodation">Accommodation</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="overlay"></div>
+        <video poster="/assets/images/shearers_quaters/stars_projected_cropped_wmargin_small.jpg" id="stars" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+            <source src="/assets/images/shearers_quaters/stars_small_timelapse_fade_highly_compressed.mp4" type="video/mp4">
+        </video>
+      <div class="container h-100">
+        <div class="d-flex text-center h-100">
+          <div class="my-auto w-100 text-white">
+            <h1 class="display-3">Welcome to Hiltaba!</h1>
+            <h2>Drop in to Hiltaba Nature Reserve</h2>
+          </div>
+        </div>
+      </div>
+        <!--
+        <script>
+            var vid = document.getElementById("stars");
+            vid.playbackRate = 0.5;
+        </script>
+        -->
+    </header>
+    <div class="container-fluid">
+        <!--
+        <div class="row" style="margin-top: -65px">
+            <div id="visit" class="col mx-0 px-0" style="height: 100vh; padding-top: 65px;">
+                <div class="embed-responsive" style="width: 100%; height: 100%">
+                    <iframe class="embed-responsive-item" src="https://embed.alpacamaps.com/journey/53a661dc-b17d-11e8-a4a7-024bc0398b11/default" style="min-height:300px; width:100%; background-color:white;" allowFullScreen></iframe>
+                </div>
+            </div>
+        </div>
+        -->
+        <div class="row">
+            <!-- container for map - set to height of page-->
+            <div class="col" style="height: 100vh">
+                <div id='map' style='height: 100%;'></div>
+            </div>
+            <!-- container for controls -->
+            <div class="d-sm-none d-md-block col-md-5 col-lg-4 col-xl-3">
+                <div id="mainMapMenu" class="mapMenu">
+                    <div class="p-2">
+                        <a href="javascript:void(0)" class="closebtn text-white" style="font-size: 36px;" onclick="closeNav()">&times;</a>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="outdoors" name="layer" class="custom-control-input" checked="checked">
+                            <label class="custom-control-label text-white" for="outdoors">Map</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="satellite" name="layer" class="custom-control-input">
+                            <label class="custom-control-label text-white" for="satellite">Satellite</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="reception" checked="checked">
+                            <label class="custom-control-label text-white" for="reception">Telstra Reception</label>
+                        </div>
+                        <div class="my-2" style="height: 4rem;">
+                            <img src="./assets/images/legend/telstraHeatSnip.png" height="100%" class="mr-2 float-left">
+                            <p class="text-white"><small>Phone signal logged (strength varies with conditions!)</small></p>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="mapillary" checked="checked">
+                            <label class="custom-control-label text-white" for="mapillary">Mapillary Photos</label>
+                        </div>
+                        <!-- <img src="./assets/images/legend/mapillaryPointSnip.png" style="width: 17ch;"> -->
+                        <img src="./assets/images/legend/mapillaryPointSnip.png" style="height: 4rem;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- </div> -->
+            <!--
+            <div class="col px-0" style="height: 100vh">
+                <div id='map' style='height: 100%; padding-top: 65px;'>
+                <div id='map' style='height: 100%;'>
+                </div>
+                <style>
+                    .mapMenu {
+                        height: 100%;
+                        /* 0 width - change this with JavaScript */
+                        width: 0;
+                        /* Stay on top */
+                        position: absolute;
+                        z-index: 1;
+                        top: 0;
+                        right: 0;
+                        background-color: rgba(0,0,0,0.5);
+                        overflow-x: hidden; /* Disable horizontal scroll */
+                        padding-top: 60px; /* Place content 60px from the top */
+                        transition: 0.3s;
+                    }
+                </style>
+                <div>
+                    <button type="button" class="btn btn-dark" onclick="openNav()" id="menuShow" style="position: absolute; top: 65px; right: 0;">Menu</button>
+                </div>
+                <div id="mainMapMenu" class="mapMenu">
+                    <div class="p-2">
+                    <a href="javascript:void(0)" class="closebtn text-white" style="font-size: 36px;" onclick="closeNav()">&times;</a>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="outdoors" name="layer" class="custom-control-input" checked="checked">
+                        <label class="custom-control-label text-white" for="outdoors">Map</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="satellite" name="layer" class="custom-control-input">
+                        <label class="custom-control-label text-white" for="satellite">Satellite</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="reception">
+                        <label class="custom-control-label text-white" for="reception">Telstra Reception</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="mapillary">
+                        <label class="custom-control-label text-white" for="mapillary">Mapillary Photos</label>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            -->
+    <!-- boostrap javacript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script>
+        /* Set the width of the side navigation to 250px */
+        function openNav() {
+            document.getElementById("menuShow").hidden = true;
+            document.getElementById("mainMapMenu").style.width = "250px";
+        }
+
+        /* Set the width of the side navigation to 0 */
+        function closeNav() {
+            document.getElementById("mainMapMenu").style.width = "0";
+            //document.getElementById("menuShow").hidden = false;
+        }
+    </script>
+    <script>
+        //initialise state variables
+        var receptionState = {};
+        receptionState.loaded = false;
+        receptionState.visible = false;
+        // initialise map container
+        mapboxgl.accessToken = 'pk.eyJ1Ijoiam9zaGciLCJhIjoiTFBBaE1JOCJ9.-BaGpeSYz4yPrpxh1eqT2A';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/joshg/cjm0bck9r74ji2rlenm6daoz8',
+            center: [135.248, -32.229],
+            zoom: 10.0
+        });
+        // var nav = new mapboxgl.NavigationControl();
+        map.addControl(new mapboxgl.NavigationControl(), 'bottom-left');
+        // specify sources
+        map.on('load', function () {
+            // add mapillary layer
+            map.addLayer({
+                "id": "mapillary",
+                // type so can use custom symbol
+                "type": "circle",
+                "source": {
+                    "type": "vector",
+                    "tiles": ["https://d25uarhxywzl1j.cloudfront.net/v0.1/{z}/{x}/{y}.mvt"],
+                    "minzoom": 14,
+                    "maxzoom": 14
+                },
+                "source-layer": "mapillary-images",
+                "paint": {
+                    "circle-color": "#34AF6E"
+                }
+            });
+            map.setLayoutProperty("mapillary", "visibility", "visible");
+            map.setLayoutProperty("reception", "visibility", "visible");
+            // add menu functions
+            var toggleLayers = {reception, mapillary};
+            toggleLayers.reception.visibility = "visible";
+            toggleLayers.mapillary.visibility = "visible";
+
+            function updateToggleState() {
+                Object.keys(toggleLayers).forEach(function(key) {
+                    toggleLayers[key].visibility = map.getLayoutProperty(key ,"visibility");
+                });
+            }
+
+            function applyToggleState() {
+                Object.keys(toggleLayers).forEach(function(key) {
+                    map.setLayoutProperty(key, "visibility", toggleLayers[key].visibility);
+                });
+            }
+
+            function applyVisibility(visibility){
+                layerIds.forEach(function(layerId) {
+                    map.setLayoutProperty(layerId, 'visibility', visibility);
+                });
+            }
+
+            function toggleVisibility(layer) {
+                if (map.getLayoutProperty(layer, 'visibility') == 'none') {
+                    map.setLayoutProperty(layer, "visibility", "visible");
+                }
+                else {
+                    map.setLayoutProperty(layer, "visibility", "none");
+                }
+            }
+
+            var layerIds = map.getStyle().layers.map(function(layer) {
+                return layer.id;
+            });
+
+            // add event listeners to menu
+            document.getElementById("satellite").addEventListener("click", function() {
+                updateToggleState();
+                applyVisibility("none");
+                map.setLayoutProperty("mapbox-satellite", 'visibility', 'visible');
+                applyToggleState();
+            });
+
+            document.getElementById("outdoors").addEventListener("click", function() {
+                updateToggleState();
+                applyVisibility("visible");
+                map.setLayoutProperty("mapbox-satellite", 'visibility', 'none');
+                applyToggleState();
+            });
+
+            document.getElementById("reception").addEventListener("click", function() {
+                // applyVisibility("visible");
+                toggleVisibility("reception");
+            });
+
+            document.getElementById("mapillary").addEventListener("click", function() {
+                // applyVisibility("visible");
+                toggleVisibility("mapillary");
+            });
+        });
+        // from mapbox examples
+        // When a click event occurs on a feature in the mapillary layer, open a popup at the
+        // location of the feature, with description HTML from its properties.
+        map.on('click', 'mapillary', function (e) {
+            var coordinates = e.features[0].geometry.coordinates.slice();
+            console.log(e.features[0]);
+            var imagekey = e.features[0].properties.key;
+
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+            // new mapboxgl.Popup()
+            var popup = new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML('<div id="' + imagekey + '" style="width: 640px; height: 480px;"></div>')
+                .addTo(map);
+            mapview = new Mapillary.Viewer(
+                imagekey,
+                'VlY1Y1BMVEttZmpBd0hManFIcnVKdzo1MDdjZGExZDMyMTE2MDdi',
+                imagekey,
+                {
+                    component: {
+                        cover: false
+                    }
+                }
+            );
+            mapview.on(Mapillary.Viewer.nodechanged, function (node) {
+                var lnglat = [node.latLon.lon, node.latLon.lat];
+                popup.setLngLat(lnglat);
+                console.log(lnglat);
+            });
+        });
+    </script>
+</body>
+</html>
