@@ -7,103 +7,20 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     -->
     <title>Welcome to Hiltaba</title>
-
-    <!-- Mapbox -->
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
-
-    <!-- Mapillary viewer -->
-    <script src='https://unpkg.com/mapillary-js@2.12.1/dist/mapillary.min.js'></script>
     <link href='https://unpkg.com/mapillary-js@2.12.1/dist/mapillary.min.css' rel='stylesheet' />
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
 
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/home.css" />
+
 </head>
 <body>
-    <!--
-        https://www.w3schools.com/howto/howto_css_full_page.asp
-        https://startbootstrap.com/snippets/video-header/
-    -->
-    <style>
-        body, html {
-            height: 100%;
-        }
-
-        .star_background {
-            background-image: url("/assets/images/shearers_quarters/stars_image.JPG");
-            height: 75%;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        header {
-            position: relative;
-            background-color: black;
-            height: 75vh;
-            min-height: 25rem;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        header video {
-            /* position: absolute; */
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: 0;
-            -ms-transform: translateX(-50%) translateY(-50%);
-            -moz-transform: translateX(-50%) translateY(-50%);
-            -webkit-transform: translateX(-50%) translateY(-50%);
-            transform: translateX(-50%) translateY(-50%);
-        }
-
-        header .container {
-            position: relative;
-            z-index: 2;
-        }
-
-        header .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            /*
-            background-color: black;
-            opacity: 0.5;
-            */
-            z-index: 1;
-        }
-
-        @media (pointer: coarse) and (hover: none) {
-            header {
-                background: url('/assets/images/shearers_quarters/stars_image.JPG') black no-repeat center center scroll;
-                background-attachment: fixed;
-            }
-            header video {
-                display: none;
-            }
-        }
-    </style>
-    <style>
-        .mapboxgl-popup {
-            max-width: 300px;
-        }
-
-        .mapboxgl-popup-content {
-            padding: 0px;
-        }
-    </style>
     <header>
         <div class="container-fluid">
-            <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: rgba(0,0,0,0.5)">
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
                 <a class="navbar-brand" href="#">
                     <img src="/assets/images/logo/logo.svg" height="30" alt="">
                 </a>
@@ -155,19 +72,74 @@
         </script>
         -->
     </header>
+    <div class="light-background">
+    <div class="container">
+        <!-- general information -->
+        <div class="row">
+            <div class="col pt-3">
+                <h1>Hiltaba</h1>
+                <p>The Hiltaba Nature Reserve adjoins the northern edge of the Gawler Ranges National Park, around 100 km inland from Streaky Bay, or a 70km detour from the Eyre Highway. The reserve covers 78,000 hectares of land including magnificent granite hills, diverse grass and woodlands, 40 state-listed species and nine species listed by the Commonwealth for their conservation significance. Until 2012 Hiltaba was a working sheep station, though overgrazing caused significant damage to the property. In 2012 the property was purchased by the Nature Foundation. Subsequent conservation efforts by the foundation have been remarkably successful.</p>
+                <h1>Facilities</h1>
+                <p>There are two campsites situated on site at Pretty Point and near the Shearers Quarters. More accommodation is available at either the cottages near the homestead or a refurbished Shearers Quarters a kilometre down the road. Five nature walks have been constructed and two nature drives. These have been designed to allow people to observe the diverse range of ecosystems, flora and fauna and the amazing geological formations on the site whilst minimising environmental impact. Station managers are usually available to take visitors on a tour of the site.</p>
+            </div>
+        </div>
+    </div>
+    </div>
     <div class="container-fluid">
-        <!--
-        -->
         <div class="row">
             <!-- container for map - set to height of page-->
-            <div class="col" style="height: 100vh">
-                <div id='map' style='height: 100%;'></div>
+            <!-- <a href="#map"></a> -->
+            <div class="col p-0" style="height: 100vh">
+                <div class="mapMenuShow">
+                    <button
+                        onclick="openNav()" 
+                        type="button" 
+                        class="btn btn-dark" 
+                        id="menuShow" style="position: fixed; top: 65px; right: 0;">
+                        Menu
+                    </button>
+                </div>
+                <div id='map' style='height: 100%;'>
+                </div>
             </div>
             <!-- container for controls -->
-            <div class="d-sm-none d-md-block col-md-5 col-lg-4 col-xl-3" style="background-color: black;">
-                <div id="mainMapMenu" class="mapMenu">
+            <style>
+                .mapMenuShow: {
+                    display: none;
+                }
+                @media only screen and (max-width: 768px) {
+                    .mapMenu {
+                        height: 100%;
+                        /* 0 width - change this with JavaScript */
+                        width: 400;
+                        /* Stay on top */
+                        position: absolute;
+                        z-index: 1;
+                        top: 0;
+                        right: 0;
+                        background-color: rgba(0,0,0,0.5);
+                        overflow-x: hidden; /* Disable horizontal scroll */
+                        overflow-y: auto;
+                        padding-top: 65px; /* Place content 60px from the top */
+                        transition: 0.3s;
+                    }
+                    .mapMenuParent {
+                        width: 0px;
+                        margin-left: 0px;
+                        margin-right: 0px;
+                        padding-left: 0px;
+                        padding-right: 0px;
+                    }
+                    .mapMenuShow {
+                        display: block;
+                    }
+                }
+            </style>
+            <div class="mapMenuParent d-md-block col-md-5 col-lg-4 col-xl-3" style="background-color: black; height: 100vh">
+                <!-- <a href="javascript:void(0)" class="closebtn text-white" style="font-size: 36px;" onclick="closeNav()">&times;</a> -->
+                <div style="height: 65px;"></div>
+                <div id="mainMapMenu" class="mapMenu" style="overflow: auto; height: 100%;">
                     <div class="p-2">
-                        <a href="javascript:void(0)" class="closebtn text-white" style="font-size: 36px;" onclick="closeNav()">&times;</a>
                         <div class="custom-control custom-radio">
                             <input type="radio" id="outdoors" name="layer" class="custom-control-input" checked="checked">
                             <label class="custom-control-label text-white" for="outdoors">Map</label>
@@ -186,13 +158,13 @@
                         </div>
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="mapillary" checked="checked">
-                            <label class="custom-control-label text-white" for="mapillary">Mapillary Photos</label>
+                            <label class="custom-control-label text-white" for="mapillary">Track View</label>
                         </div>
                         <div class="my-2" style="height: 4rem;">
                             <img src="./assets/images/legend/mapillaryPointSnip.png" height="100%" class="mr-2 float-left">
-                            <p class="text-white"><small>Track View<br>Zoom in to see points and click to explore.</small></p>
+                            <p class="text-white"><small>Zoom in to walking trails for ground level images.</small></p>
                         </div>
-                        <button data-toggle="collapse" data-target="#accomodation" aria-controls="accomodation" aria-expanded="false">Accomodation &#x25BC;</button>
+                        <a href="#" class="text-white dropdown-toggle" data-toggle="collapse" data-target="#accomodation" aria-controls="accomodation" aria-expanded="false">Accomodation</a>
                         <div id="accomodation" class="collapse">
                             <p class="text-white">Tap pictures to fly to accomodation locations and map icons to view details</p>
                             <!-- Cottages -->
@@ -252,9 +224,6 @@
                         transition: 0.3s;
                     }
                 </style>
-                <div>
-                    <button type="button" class="btn btn-dark" onclick="openNav()" id="menuShow" style="position: absolute; top: 65px; right: 0;">Menu</button>
-                </div>
                 <div id="mainMapMenu" class="mapMenu">
                     <div class="p-2">
                     <a href="javascript:void(0)" class="closebtn text-white" style="font-size: 36px;" onclick="closeNav()">&times;</a>
@@ -278,196 +247,19 @@
                 </div>
             </div>
             -->
-    <!-- boostrap javacript -->
+
+    <!-- Mapbox -->
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
+
+    <!-- Mapillary Viewer -->
+    <script src='https://unpkg.com/mapillary-js@2.12.1/dist/mapillary.min.js'></script>
+
+    <!-- Boostrap JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script>
-        //initialise state variables
-        var receptionState = {};
-        receptionState.loaded = false;
-        receptionState.visible = false;
-        // initialise map container
-        mapboxgl.accessToken = 'pk.eyJ1Ijoiam9zaGciLCJhIjoiTFBBaE1JOCJ9.-BaGpeSYz4yPrpxh1eqT2A';
-        var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/joshg/cjm0bck9r74ji2rlenm6daoz8',
-            center: [135.248, -32.229],
-            zoom: 10.0
-        });
-        // var nav = new mapboxgl.NavigationControl();
-        map.addControl(new mapboxgl.NavigationControl(), 'bottom-left');
-        // specify sources
-        map.on('load', function () {
-            // add mapillary layer
-            map.addLayer({
-                "id": "mapillary",
-                // type so can use custom symbol
-                "type": "circle",
-                "source": {
-                    "type": "vector",
-                    "tiles": ["https://d25uarhxywzl1j.cloudfront.net/v0.1/{z}/{x}/{y}.mvt"],
-                    "minzoom": 14,
-                    "maxzoom": 14
-                },
-                "source-layer": "mapillary-images",
-                "paint": {
-                    "circle-color": "#34AF6E"
-                }
-            });
-            map.setLayoutProperty("mapillary", "visibility", "visible");
-            map.setLayoutProperty("reception", "visibility", "visible");
-            // add menu functions
-            var toggleLayers = {reception, mapillary};
-            toggleLayers.reception.visibility = "visible";
-            toggleLayers.mapillary.visibility = "visible";
 
-            function updateToggleState() {
-                Object.keys(toggleLayers).forEach(function(key) {
-                    toggleLayers[key].visibility = map.getLayoutProperty(key ,"visibility");
-                });
-            }
-
-            function applyToggleState() {
-                Object.keys(toggleLayers).forEach(function(key) {
-                    map.setLayoutProperty(key, "visibility", toggleLayers[key].visibility);
-                });
-            }
-
-            function applyVisibility(visibility){
-                layerIds.forEach(function(layerId) {
-                    map.setLayoutProperty(layerId, 'visibility', visibility);
-                });
-            }
-
-            function toggleVisibility(layer) {
-                if (map.getLayoutProperty(layer, 'visibility') == 'none') {
-                    map.setLayoutProperty(layer, "visibility", "visible");
-                }
-                else {
-                    map.setLayoutProperty(layer, "visibility", "none");
-                }
-            }
-
-            var layerIds = map.getStyle().layers.map(function(layer) {
-                return layer.id;
-            });
-
-            // add event listeners to menu
-            document.getElementById("satellite").addEventListener("click", function() {
-                updateToggleState();
-                applyVisibility("none");
-                map.setLayoutProperty("mapbox-satellite", 'visibility', 'visible');
-                applyToggleState();
-            });
-
-            document.getElementById("outdoors").addEventListener("click", function() {
-                updateToggleState();
-                applyVisibility("visible");
-                map.setLayoutProperty("mapbox-satellite", 'visibility', 'none');
-                applyToggleState();
-            });
-
-            document.getElementById("reception").addEventListener("click", function() {
-                // applyVisibility("visible");
-                toggleVisibility("reception");
-            });
-
-            document.getElementById("mapillary").addEventListener("click", function() {
-                // applyVisibility("visible");
-                toggleVisibility("mapillary");
-            });
-        });
-        // from mapbox examples
-        // When a click event occurs on a feature in the mapillary layer, open a popup at the
-        // location of the feature, with description HTML from its properties.
-        map.on('click', function(e) {
-            // add accomodation popups
-            var features = map.queryRenderedFeatures(e.point, {
-                layers: ['hiltaba-accommodation']
-            });
-            if (!features.length){
-                return;
-            };
-            var feature = features[0];
-            var popup = new mapboxgl.Popup({ offset: [0, -15] })
-                .setLngLat(feature.geometry.coordinates)
-                .setHTML('<img src="' + feature.properties.image + '" style="width: 100%;">' + '<div class="p-2">' + '<h6>' + feature.properties.name + '</h6>' + '<p>' + feature.properties.description + '<br>' + feature.properties.price + '</p></div>')
-                .addTo(map);
-        });
-        map.on('click', 'mapillary', function (e) {
-            var coordinates = e.features[0].geometry.coordinates.slice();
-            console.log(e.features[0]);
-            var imagekey = e.features[0].properties.key;
-
-            // Ensure that if the map is zoomed out such that multiple
-            // copies of the feature are visible, the popup appears
-            // over the copy being pointed to.
-            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-            }
-            // new mapboxgl.Popup()
-            var popup = new mapboxgl.Popup()
-                .setLngLat(coordinates)
-                .setHTML('<div id="' + imagekey + '" style="width: 640px; height: 480px;"></div>')
-                .addTo(map);
-            mapview = new Mapillary.Viewer(
-                imagekey,
-                'VlY1Y1BMVEttZmpBd0hManFIcnVKdzo1MDdjZGExZDMyMTE2MDdi',
-                imagekey,
-                {
-                    component: {
-                        cover: false
-                    }
-                }
-            );
-            mapview.on(Mapillary.Viewer.nodechanged, function (node) {
-                var lnglat = [node.latLon.lon, node.latLon.lat];
-                popup.setLngLat(lnglat);
-                console.log(lnglat);
-            });
-        });
-    </script>
-    <script>
-        /* Set the width of the side navigation to 250px */
-        function openNav() {
-            document.getElementById("menuShow").hidden = true;
-            document.getElementById("mainMapMenu").style.width = "250px";
-        }
-
-        /* Set the width of the side navigation to 0 */
-        function closeNav() {
-            document.getElementById("mainMapMenu").style.width = "0";
-            //document.getElementById("menuShow").hidden = false;
-        }
-
-        $('#jackaroo_cottage').on('click', function() {
-            map.flyTo({
-                center: [135.071,-32.157],
-                zoom: 17
-            });
-        });
-
-        $('#shearers_quarters').on('click', function() {
-            map.flyTo({
-                center: [135.0925,-32.1605],
-                zoom: 17
-            });
-        });
-
-        $('#shearers_quarters_campground').on('click', function() {
-            map.flyTo({
-                center: [135.0926,-32.1608],
-                zoom: 17
-            });
-        });
-
-        $('#pretty_point_campground').on('click', function() {
-            map.flyTo({
-                center: [135.149,-32.173],
-                zoom: 17
-            });
-        });
-    </script>
+    <!-- Custom JavaScript -->
+    <script src="/assets/js/home.js"></script>
 </body>
 </html>
