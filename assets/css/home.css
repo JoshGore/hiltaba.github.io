@@ -83,10 +83,10 @@ header .overlay {
 .transparent-background {
     background: rgba(0,0,0,0.5);
 }
-.mapMenuShow: {
+.mapMenuShow {
     display: none;
 }
-#main-map-menu: {
+#main-map-menu {
     /* Place content 65px from the top */
     padding-top: 65px; 
 }
@@ -142,4 +142,14 @@ header .overlay {
 .fullpagesection {
     height: 100vh; 
     padding-top: 65px;
+}
+
+a.anchor {
+    display: block;
+    position: relative;
+    top: -65px;
+    visibility: hidden;
+}
+.detail-row {
+    display: none;
 }

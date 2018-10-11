@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -18,47 +19,47 @@
 
 </head>
 <body>
-        <div class="container-fluid">
-            <nav class="transparent-background navbar navbar-expand-lg navbar-dark fixed-top">
-                <a class="navbar-brand" href="#">
-                    <img src="/assets/images/logo/logo.svg" height="30" alt="">
-                </a>
-                <button 
-                    class="navbar-toggler" 
-                    type="button" 
-                    data-toggle="collapse" 
-                    data-target="#navbarSupportedContent" 
-                    aria-controls="navbarSupportedContent" 
-                    aria-expanded="false" 
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#map">Map</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#visit">Itinerary</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav justify-content-end">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/drives">Nature Drives</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/trails">Nature Trails</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/accommodation">Accommodation</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
+    <div class="container-fluid">
+        <nav class="transparent-background navbar navbar-expand-lg navbar-dark fixed-top">
+            <a class="navbar-brand" href="#">
+                <img src="/assets/images/logo/logo.svg" height="30" alt="">
+            </a>
+            <button 
+                class="navbar-toggler" 
+                type="button" 
+                data-toggle="collapse" 
+                data-target="#navbarSupportedContent" 
+                aria-controls="navbarSupportedContent" 
+                aria-expanded="false" 
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#visit">Itinerary</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#map">Map</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/drives">Nature Drives</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/trails">Nature Trails</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/accommodation">Accommodation</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
     <header>
         <div class="overlay"></div>
         <video 
@@ -88,7 +89,7 @@
     <div class="light-background">
         <div class="container">
             <!-- general information -->
-            <div class="row py-3">
+            <div class="row pt-3">
                 <div class="col-12 col-md-4 col-lg py-3">
                     <img src="/assets/images/general/hiltaba_hills_1.jpg" style="width: 100%; height: 100%; object-fit: cover;"></img>
                 </div>
@@ -105,10 +106,51 @@
                     <img src="/assets/images/general/hiltaba_hills_2.jpg" style="width: 100%; height: 100%; object-fit: cover;"></img>
                 </div>
             </div>
+            <div class="row">
+                <a class="anchor" id="visit"></a>
+                <div class="col py-3">
+                    <h1>Itinerary</h1>
+                    <p>A visit to Hiltaba can be combined with detours to Mt Isa Station and the Gawler Ranges National Park. We have created an itinerary using the alpaca maps platform which allows offline map use.</p>
+                    <a 
+                        href="#" 
+                        class="dropdown-toggle btn btn-dark" 
+                        data-toggle="collapse" 
+                        data-target="#alpaca-use" 
+                        aria-controls="alpaca-use" 
+                        aria-expanded="false">
+                        How to Download
+                    </a>
+                    <div id="alpaca-use" class="collapse">
+                        <div class="row pt-2">
+                            <div class="col py-2">
+                                <img src="/assets/images/alpaca_instructions/step_1_crop_ink.jpg" style="width: 100%"></img>
+                            </div>
+                            <div class="col py-2">
+                                <img src="/assets/images/alpaca_instructions/step_2_crop_ink.jpg" style="width: 100%"></img>
+                            </div>
+                            <div class="w-100 d-block d-sm-none"></div>
+                            <div class="col py-2">
+                                <img src="/assets/images/alpaca_instructions/step_3_crop_ink.jpg" style="width: 100%"></img>
+                            </div>
+                            <div class="w-100 d-none d-sm-block d-lg-none"></div>
+                            <div class="col py-2">
+                                <img src="/assets/images/alpaca_instructions/step_4_crop_ink.jpg" style="width: 100%"></img>
+                            </div>
+                            <div class="w-100 d-block d-sm-none"></div>
+                            <div class="col-6 col-sm py-2">
+                                <img src="/assets/images/alpaca_instructions/step_5_crop_ink.jpg" style="width: 100%"></img>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="embed-responsive mt-3" style="width: 100%; height: 75vh">
+                        <iframe class="embed-responsive-item" src="https://embed.alpacamaps.com/journey/53a661dc-b17d-11e8-a4a7-024bc0398b11/default" style="min-height:300px; width:100%; background-color:white;" allowFullScreen></iframe>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="row">
+    <div class="container-fluid light-background">
+        <div class="row pt-3">
             <!-- container for map - set to height of page-->
             <div class="col p-0" style="height: 100vh">
                 <div id='map' style='height: 100%;'></div>
@@ -188,6 +230,7 @@
                 </div>
             </div>
         </div>
+        <!--
         <div class="row" style="margin-top: -65px">
             <div id="visit" class="col mx-0 px-0 fullpagesection">
                 <div class="embed-responsive" style="width: 100%; height: 100%">
@@ -195,6 +238,7 @@
                 </div>
             </div>
         </div>
+        -->
 
     <!-- Mapbox -->
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
