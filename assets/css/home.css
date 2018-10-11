@@ -153,3 +153,7 @@ a.anchor {
 .detail-row {
     display: none;
 }
+.map-nav-link:hover {
+    background: rgba(255,255,255,0.3);
+    cursor: pointer;
+}
