@@ -18,22 +18,28 @@
 
 </head>
 <body>
-    <header>
         <div class="container-fluid">
-            <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <nav class="transparent-background navbar navbar-expand-lg navbar-dark fixed-top">
                 <a class="navbar-brand" href="#">
                     <img src="/assets/images/logo/logo.svg" height="30" alt="">
                 </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button 
+                    class="navbar-toggler" 
+                    type="button" 
+                    data-toggle="collapse" 
+                    data-target="#navbarSupportedContent" 
+                    aria-controls="navbarSupportedContent" 
+                    aria-expanded="false" 
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#visit">Itinerary</a>
+                            <a class="nav-link" href="#map">Map</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#map">Map</a>
+                            <a class="nav-link" href="#visit">Itinerary</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav justify-content-end">
@@ -53,8 +59,15 @@
                 </div>
             </nav>
         </div>
+    <header>
         <div class="overlay"></div>
-        <video poster="/assets/images/shearers_quarters/stars_projected_cropped_wmargin_small.jpg" id="stars" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+        <video 
+            poster="/assets/images/shearers_quarters/stars_projected_cropped_wmargin_small.jpg" 
+            id="stars" 
+            playsinline="playsinline" 
+            autoplay="autoplay" 
+            muted="muted" 
+            loop="loop">
             <source src="/assets/images/shearers_quarters/stars_small_timelapse_fade_highly_compressed.mp4" type="video/mp4">
         </video>
       <div class="container h-100">
@@ -73,73 +86,53 @@
         -->
     </header>
     <div class="light-background">
-    <div class="container">
-        <!-- general information -->
-        <div class="row">
-            <div class="col pt-3">
-                <h1>Hiltaba</h1>
-                <p>The Hiltaba Nature Reserve adjoins the northern edge of the Gawler Ranges National Park, around 100 km inland from Streaky Bay, or a 70km detour from the Eyre Highway. The reserve covers 78,000 hectares of land including magnificent granite hills, diverse grass and woodlands, 40 state-listed species and nine species listed by the Commonwealth for their conservation significance. Until 2012 Hiltaba was a working sheep station, though overgrazing caused significant damage to the property. In 2012 the property was purchased by the Nature Foundation. Subsequent conservation efforts by the foundation have been remarkably successful.</p>
-                <h1>Facilities</h1>
-                <p>There are two campsites situated on site at Pretty Point and near the Shearers Quarters. More accommodation is available at either the cottages near the homestead or a refurbished Shearers Quarters a kilometre down the road. Five nature walks have been constructed and two nature drives. These have been designed to allow people to observe the diverse range of ecosystems, flora and fauna and the amazing geological formations on the site whilst minimising environmental impact. Station managers are usually available to take visitors on a tour of the site.</p>
+        <div class="container">
+            <!-- general information -->
+            <div class="row py-3">
+                <div class="col-12 col-md-4 col-lg py-3">
+                    <img src="/assets/images/general/hiltaba_hills_1.jpg" style="width: 100%; height: 100%; object-fit: cover;"></img>
+                </div>
+                <div class="col-12 col-md py-3">
+                    <h1>Hiltaba</h1>
+                    <p>The Hiltaba Nature Reserve adjoins the northern edge of the Gawler Ranges National Park, around 100 km inland from Streaky Bay, or a 70km detour from the Eyre Highway. The reserve covers 78,000 hectares of land including magnificent granite hills, diverse grass and woodlands, 40 state-listed species and nine species listed by the Commonwealth for their conservation significance. Until 2012 Hiltaba was a working sheep station, though overgrazing caused significant damage to the property. In 2012 the property was purchased by the Nature Foundation. Subsequent conservation efforts by the foundation have been remarkably successful.</p>
+                </div>
+                <div class="w-100"></div>
+                <div class="col-12 order-sm-2 order-md-1 col-md col-lg py-3">
+                    <h1>Facilities</h1>
+                    <p>There are two campsites situated on site at Pretty Point and near the Shearers Quarters. More accommodation is available at either the cottages near the homestead or a refurbished Shearers Quarters a kilometre down the road. Five nature walks have been constructed and two nature drives. These have been designed to allow people to observe the diverse range of ecosystems, flora and fauna and the amazing geological formations on the site whilst minimising environmental impact. Station managers are usually available to take visitors on a tour of the site.</p>
+                </div>
+                <div class="col-12 order-sm-1 order-md-2 col-md-4 col-lg py-3">
+                    <img src="/assets/images/general/hiltaba_hills_2.jpg" style="width: 100%; height: 100%; object-fit: cover;"></img>
+                </div>
             </div>
         </div>
-    </div>
     </div>
     <div class="container-fluid">
         <div class="row">
             <!-- container for map - set to height of page-->
-            <!-- <a href="#map"></a> -->
             <div class="col p-0" style="height: 100vh">
-                <div class="mapMenuShow">
-                    <button
-                        onclick="openNav()" 
-                        type="button" 
-                        class="btn btn-dark" 
-                        id="menuShow" style="position: fixed; top: 65px; right: 0;">
-                        Menu
-                    </button>
-                </div>
-                <div id='map' style='height: 100%;'>
-                </div>
+                <div id='map' style='height: 100%;'></div>
             </div>
             <!-- container for controls -->
-            <style>
-                .mapMenuShow: {
-                    display: none;
-                }
-                @media only screen and (max-width: 768px) {
-                    .mapMenu {
-                        height: 100%;
-                        /* 0 width - change this with JavaScript */
-                        width: 400;
-                        /* Stay on top */
-                        position: absolute;
-                        z-index: 1;
-                        top: 0;
-                        right: 0;
-                        background-color: rgba(0,0,0,0.5);
-                        overflow-x: hidden; /* Disable horizontal scroll */
-                        overflow-y: auto;
-                        padding-top: 65px; /* Place content 60px from the top */
-                        transition: 0.3s;
-                    }
-                    .mapMenuParent {
-                        width: 0px;
-                        margin-left: 0px;
-                        margin-right: 0px;
-                        padding-left: 0px;
-                        padding-right: 0px;
-                    }
-                    .mapMenuShow {
-                        display: block;
-                    }
-                }
-            </style>
-            <div class="mapMenuParent d-md-block col-md-5 col-lg-4 col-xl-3" style="background-color: black; height: 100vh">
-                <!-- <a href="javascript:void(0)" class="closebtn text-white" style="font-size: 36px;" onclick="closeNav()">&times;</a> -->
-                <div style="height: 65px;"></div>
-                <div id="mainMapMenu" class="mapMenu" style="overflow: auto; height: 100%;">
-                    <div class="p-2">
+            <div id="mapMenuParent" class="d-md-block col-md-5 col-lg-4 col-xl-3" style="background-color: black; height: 100vh">
+                <div id="main-map-menu" class="transparent-background" style="overflow: auto; height: 100%;">
+                    <div class="d-md-none" id="map-menu-toggle">
+                        <div id="map-menu-toggle-icon">
+                            <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.16 174.1" style="height: 100%">
+                                <defs>
+                                    <style>
+                                        .cls-2 {
+                                            fill:#231f20;
+                                            stroke-width:0.96px;
+                                            stroke-miterlimit:10;
+                                        }
+                                    </style>
+                                </defs>
+                                <polygon class="cls-2" points="0.52 87.05 35.68 171.7 35.68 2.4 0.52 87.05"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div id="controlsContainer" class="p-2">
                         <div class="custom-control custom-radio">
                             <input type="radio" id="outdoors" name="layer" class="custom-control-input" checked="checked">
                             <label class="custom-control-label text-white" for="outdoors">Map</label>
@@ -196,57 +189,12 @@
             </div>
         </div>
         <div class="row" style="margin-top: -65px">
-            <div id="visit" class="col mx-0 px-0" style="height: 100vh; padding-top: 65px;">
+            <div id="visit" class="col mx-0 px-0 fullpagesection">
                 <div class="embed-responsive" style="width: 100%; height: 100%">
                     <iframe class="embed-responsive-item" src="https://embed.alpacamaps.com/journey/53a661dc-b17d-11e8-a4a7-024bc0398b11/default" style="min-height:300px; width:100%; background-color:white;" allowFullScreen></iframe>
                 </div>
             </div>
         </div>
-        <!-- </div> -->
-            <!--
-            <div class="col px-0" style="height: 100vh">
-                <div id='map' style='height: 100%; padding-top: 65px;'>
-                <div id='map' style='height: 100%;'>
-                </div>
-                <style>
-                    .mapMenu {
-                        height: 100%;
-                        /* 0 width - change this with JavaScript */
-                        width: 0;
-                        /* Stay on top */
-                        position: absolute;
-                        z-index: 1;
-                        top: 0;
-                        right: 0;
-                        background-color: rgba(0,0,0,0.5);
-                        overflow-x: hidden; /* Disable horizontal scroll */
-                        padding-top: 60px; /* Place content 60px from the top */
-                        transition: 0.3s;
-                    }
-                </style>
-                <div id="mainMapMenu" class="mapMenu">
-                    <div class="p-2">
-                    <a href="javascript:void(0)" class="closebtn text-white" style="font-size: 36px;" onclick="closeNav()">&times;</a>
-                    <div class="custom-control custom-radio">
-                        <input type="radio" id="outdoors" name="layer" class="custom-control-input" checked="checked">
-                        <label class="custom-control-label text-white" for="outdoors">Map</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                        <input type="radio" id="satellite" name="layer" class="custom-control-input">
-                        <label class="custom-control-label text-white" for="satellite">Satellite</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="reception">
-                        <label class="custom-control-label text-white" for="reception">Telstra Reception</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="mapillary">
-                        <label class="custom-control-label text-white" for="mapillary">Mapillary Photos</label>
-                    </div>
-                    </div>
-                </div>
-            </div>
-            -->
 
     <!-- Mapbox -->
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>

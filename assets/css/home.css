@@ -59,10 +59,6 @@ header .overlay {
     */
 }
 
-.navbar {
-    background: rgba(0,0,0,0.5);
-}
-
 @media (pointer: coarse) and (hover: none) {
     header {
         background: url('/assets/images/shearers_quarters/stars_image.JPG') black no-repeat center center scroll;
@@ -83,4 +79,67 @@ header .overlay {
 
 .light-background {
     background: #f3f2d7;
+}
+.transparent-background {
+    background: rgba(0,0,0,0.5);
+}
+.mapMenuShow: {
+    display: none;
+}
+#main-map-menu: {
+    /* Place content 65px from the top */
+    padding-top: 65px; 
+}
+@media only screen and (max-width: 768px) {
+    #main-map-menu {
+        height: 100%;
+        /* 0 width - change this with JavaScript */
+        width: 300px;
+        /* Stay on top */
+        position: absolute;
+        /* position: relative; */
+        z-index: 1;
+        top: 0;
+        right: 0;
+        transition: 0.5s;
+    }
+    #mapMenuParent {
+        width: 0px;
+        margin-left: 0px;
+        margin-right: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .mapMenuShow {
+        display: block;
+    }
+
+
+    #map-menu-toggle {
+        width: 30px; 
+        height: 100%;
+        float: left;
+        cursor: pointer;
+    }
+
+    #map-menu-toggle-icon {
+        width: 100%;
+        position: relative;
+        top: 50%; 
+        transform: translate(0, -50%) rotateZ(180deg);
+        float: left;
+
+    }
+
+    #controlsContainer {
+        position: static;
+        overflow-x: hidden; /* Disable horizontal scroll */
+        overflow-y: auto;
+        /* float: right; */
+    }
+
+}
+.fullpagesection {
+    height: 100vh; 
+    padding-top: 65px;
 }

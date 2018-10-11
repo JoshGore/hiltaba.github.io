@@ -144,17 +144,6 @@
                 console.log(lnglat);
             });
         });
-        /* Set the width of the side navigation to 250px */
-        function openNav() {
-            document.getElementById("menuShow").hidden = true;
-            document.getElementById("mainMapMenu").style.width = "250px";
-        }
-
-        /* Set the width of the side navigation to 0 */
-        function closeNav() {
-            document.getElementById("mainMapMenu").style.width = "0";
-            //document.getElementById("menuShow").hidden = false;
-        }
 
         $('#jackaroo_cottage').on('click', function() {
             map.flyTo({
@@ -183,3 +172,32 @@
                 zoom: 17
             });
         });
+
+        $('#map-menu-toggle').on('click', function() {
+            if (document.getElementById("controlsContainer").hidden) {
+                document.getElementById("main-map-menu").style.width = "300px";
+                document.getElementById("map-menu-toggle-icon").style.transform = "rotateZ(180deg)";
+                console.log(document.getElementById("map-menu-toggle-icon").style.transform);
+                setTimeout(function() {
+                    document.getElementById("controlsContainer").hidden = false;
+                }, 300)
+            }
+            else {
+                document.getElementById("controlsContainer").hidden = true;
+                document.getElementById("main-map-menu").style.width = "30px";
+                document.getElementById("map-menu-toggle-icon").style.transform = "rotateZ(0deg)";
+                console.log(document.getElementById("map-menu-toggle-icon").style.transform);
+            }
+        });
+
+        /* Set the width of the side navigation to 250px */
+        function openNav() {
+            document.getElementById("menuShow").hidden = true;
+            document.getElementById("main-map-menu").style.width = "250px";
+        }
+
+        /* Set the width of the side navigation to 0 */
+        function closeNav() {
+            document.getElementById("main-map-menu").style.width = "0";
+            //document.getElementById("menuShow").hidden = false;
+        }
