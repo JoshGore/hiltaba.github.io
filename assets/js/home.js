@@ -167,7 +167,6 @@ map.on('click', function(e) {
         return;
     };
     var feature = features[0];
-    console.log(feature);
     if (feature.layer.id == "hiltaba-walks-drives"){
         var popup = new mapboxgl.Popup({ offset: [0, -15] })
             .setLngLat(feature.geometry.coordinates)
