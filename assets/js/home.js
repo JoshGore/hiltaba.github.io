@@ -159,7 +159,7 @@ map.on('mouseleave', 'mapillary', function () {
 });
 
 map.on('click', function(e) {
-    // add accomodation popups
+    // add accommodation popups
     var features = map.queryRenderedFeatures(e.point, {
         layers: ['hiltaba-accommodation', 'hiltaba-walks-drives', 'mapillary']
     });
@@ -170,7 +170,7 @@ map.on('click', function(e) {
     if (feature.layer.id == "hiltaba-walks-drives"){
         var popup = new mapboxgl.Popup({ offset: [0, -15] })
             .setLngLat(feature.geometry.coordinates)
-            .setHTML((feature.properties.image ? '<img src="' + feature.properties.image + '" style="width: 100%;">' : '') + '<div class="p-2">' + '<h6>' + feature.properties.name + '</h6>' + '<p>' + feature.properties.description + '<br>' + feature.properties.price + '</p></div>')
+            .setHTML((feature.properties.image ? '<img src="' + feature.properties.image + '" style="width: 100%;">' : '') + '<div class="p-2">' + '<h6>' + feature.properties.name + '</h6>' + '<p>' + feature.properties.description + '</div>')
             .addTo(map);
     }
     else if (feature.layer.id == "hiltaba-accommodation"){
