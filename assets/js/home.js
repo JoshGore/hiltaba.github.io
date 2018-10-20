@@ -161,63 +161,49 @@ map.on('mouseleave', 'mapillary', function () {
 map.on('click', function(e) {
     // add accomodation popups
     var features = map.queryRenderedFeatures(e.point, {
-        layers: ['hiltaba-accommodation']
+        layers: ['hiltaba-accommodation', 'hiltaba-walks-drives', 'mapillary']
     });
     if (!features.length){
         return;
     };
     var feature = features[0];
-    var popup = new mapboxgl.Popup({ offset: [0, -15] })
-        .setLngLat(feature.geometry.coordinates)
-        .setHTML((feature.properties.image ? '<img src="' + feature.properties.image + '" style="width: 100%;">' : '') + '<div class="p-2">' + '<h6>' + feature.properties.name + '</h6>' + '<p>' + feature.properties.description + '<br>' + feature.properties.price + '</p></div>')
-        .addTo(map);
-});
-
-map.on('click', function(e) {
-    // add accomodation popups
-    var features = map.queryRenderedFeatures(e.point, {
-        layers: ['hiltaba-walks-drives']
-    });
-    if (!features.length){
-        return;
-    };
-    var feature = features[0];
-    var popup = new mapboxgl.Popup({ offset: [0, -15] })
-        .setLngLat(feature.geometry.coordinates)
-        .setHTML((feature.properties.image ? '<img src="' + feature.properties.image + '" style="width: 100%;">' : '') + '<div class="p-2">' + '<h6>' + feature.properties.name + '</h6>' + '<p>' + feature.properties.description + '</p></div>')
-        .addTo(map);
-});
-
-map.on('click', 'mapillary', function (e) {
-    var coordinates = e.features[0].geometry.coordinates.slice();
-    var imagekey = e.features[0].properties.key;
-
-    // Ensure that if the map is zoomed out such that multiple
-    // copies of the feature are visible, the popup appears
-    // over the copy being pointed to.
-    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    console.log(feature);
+    if (feature.layer.id == "hiltaba-walks-drives"){
+        var popup = new mapboxgl.Popup({ offset: [0, -15] })
+            .setLngLat(feature.geometry.coordinates)
+            .setHTML((feature.properties.image ? '<img src="' + feature.properties.image + '" style="width: 100%;">' : '') + '<div class="p-2">' + '<h6>' + feature.properties.name + '</h6>' + '<p>' + feature.properties.description + '<br>' + feature.properties.price + '</p></div>')
+            .addTo(map);
     }
-    // new mapboxgl.Popup()
-    var popup = new mapboxgl.Popup()
-        .setLngLat(coordinates)
-        .setHTML('<div id="' + imagekey + '" style="width: 640px; height: 480px;"></div>')
-        // .setHTML('<div id="' + imagekey + '" style="z-index: 1"></div>')
-        .addTo(map);
-    mapview = new Mapillary.Viewer(
-        imagekey,
-        'VlY1Y1BMVEttZmpBd0hManFIcnVKdzo1MDdjZGExZDMyMTE2MDdi',
-        imagekey,
-        {
-            component: {
-                cover: false
+    else if (feature.layer.id == "hiltaba-accommodation"){
+        var popup = new mapboxgl.Popup({ offset: [0, -15] })
+            .setLngLat(feature.geometry.coordinates)
+            .setHTML((feature.properties.image ? '<img src="' + feature.properties.image + '" style="width: 100%;">' : '') + '<div class="p-2">' + '<h6>' + feature.properties.name + '</h6>' + '<p>' + feature.properties.description + '<br>' + feature.properties.price + '</p></div>')
+            .addTo(map);
+
+    }
+    else if (feature.layer.id == "mapillary") {
+        var coordinates = feature.geometry.coordinates.slice();
+        var imagekey = feature.properties.key;
+        var popup = new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML('<div id="' + imagekey + '" style="width: 640px; height: 480px;"></div>')
+            // .setHTML('<div id="' + imagekey + '" style="z-index: 1"></div>')
+            .addTo(map);
+        mapview = new Mapillary.Viewer(
+            imagekey,
+            'VlY1Y1BMVEttZmpBd0hManFIcnVKdzo1MDdjZGExZDMyMTE2MDdi',
+            imagekey,
+            {
+                component: {
+                    cover: false
+                }
             }
-        }
-    );
-    mapview.on(Mapillary.Viewer.nodechanged, function (node) {
-        var lnglat = [node.latLon.lon, node.latLon.lat];
-        popup.setLngLat(lnglat);
-    });
+        );
+        mapview.on(Mapillary.Viewer.nodechanged, function (node) {
+            var lnglat = [node.latLon.lon, node.latLon.lat];
+            popup.setLngLat(lnglat);
+        });
+    }
 });
 
 $('#jackaroo_cottage').on('click', function() {
