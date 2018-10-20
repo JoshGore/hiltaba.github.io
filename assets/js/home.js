@@ -69,8 +69,12 @@ map.on('load', function () {
     map.setLayoutProperty("reception", "visibility", "visible");
     // add menu functions
     var toggleLayers = {reception, mapillary};
+    toggleLayers['hiltaba-accommodation'] = {};
+    toggleLayers['hiltaba-walks-drives'] = {};
     toggleLayers.reception.visibility = "visible";
     toggleLayers.mapillary.visibility = "visible";
+    toggleLayers['hiltaba-accommodation'].visibility = "visible";
+    toggleLayers['hiltaba-walks-drives'].visibility = "visible";
 
     function updateToggleState() {
         Object.keys(toggleLayers).forEach(function(key) {
@@ -118,22 +122,28 @@ map.on('load', function () {
         applyToggleState();
     });
 
+    document.getElementById("accommodation-toggle").addEventListener("click", function() {
+        toggleVisibility("hiltaba-accommodation");
+    });
+
+    document.getElementById("walks-drives").addEventListener("click", function() {
+        toggleVisibility("hiltaba-walks-drives");
+    });
+
     document.getElementById("reception").addEventListener("click", function() {
-        // applyVisibility("visible");
         toggleVisibility("reception");
     });
 
     document.getElementById("mapillary").addEventListener("click", function() {
-        // applyVisibility("visible");
         toggleVisibility("mapillary");
     });
 });
-// from mapbox examples
-// When a click event occurs on a feature in the mapillary layer, open a popup at the
-// location of the feature, with description HTML from its properties.
-//
-// Change the cursor to a pointer when the mouse is over the hiltaba-accommodation layer.
+
+// Change the cursor to a pointer when the mouse is over the accommodation, walks or drives layers.
 map.on('mouseenter', 'hiltaba-accommodation', function () {
+    map.getCanvas().style.cursor = 'pointer';
+});
+map.on('mouseenter', 'hiltaba-walks-drives', function () {
     map.getCanvas().style.cursor = 'pointer';
 });
 
@@ -141,6 +151,10 @@ map.on('mouseenter', 'hiltaba-accommodation', function () {
 map.on('mouseleave', 'hiltaba-accommodation', function () {
     map.getCanvas().style.cursor = '';
 });
+map.on('mouseleave', 'hiltaba-walks-drives', function () {
+    map.getCanvas().style.cursor = '';
+});
+
 map.on('click', function(e) {
     // add accomodation popups
     var features = map.queryRenderedFeatures(e.point, {
@@ -155,6 +169,22 @@ map.on('click', function(e) {
         .setHTML((feature.properties.image ? '<img src="' + feature.properties.image + '" style="width: 100%;">' : '') + '<div class="p-2">' + '<h6>' + feature.properties.name + '</h6>' + '<p>' + feature.properties.description + '<br>' + feature.properties.price + '</p></div>')
         .addTo(map);
 });
+
+map.on('click', function(e) {
+    // add accomodation popups
+    var features = map.queryRenderedFeatures(e.point, {
+        layers: ['hiltaba-walks-drives']
+    });
+    if (!features.length){
+        return;
+    };
+    var feature = features[0];
+    var popup = new mapboxgl.Popup({ offset: [0, -15] })
+        .setLngLat(feature.geometry.coordinates)
+        .setHTML((feature.properties.image ? '<img src="' + feature.properties.image + '" style="width: 100%;">' : '') + '<div class="p-2">' + '<h6>' + feature.properties.name + '</h6>' + '<p>' + feature.properties.description + '</p></div>')
+        .addTo(map);
+});
+
 map.on('click', 'mapillary', function (e) {
     var coordinates = e.features[0].geometry.coordinates.slice();
     var imagekey = e.features[0].properties.key;
