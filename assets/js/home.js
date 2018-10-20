@@ -131,6 +131,16 @@ map.on('load', function () {
 // from mapbox examples
 // When a click event occurs on a feature in the mapillary layer, open a popup at the
 // location of the feature, with description HTML from its properties.
+//
+// Change the cursor to a pointer when the mouse is over the hiltaba-accommodation layer.
+map.on('mouseenter', 'hiltaba-accommodation', function () {
+    map.getCanvas().style.cursor = 'pointer';
+});
+
+// Change it back to a pointer when it leaves.
+map.on('mouseleave', 'hiltaba-accommodation', function () {
+    map.getCanvas().style.cursor = '';
+});
 map.on('click', function(e) {
     // add accomodation popups
     var features = map.queryRenderedFeatures(e.point, {
@@ -147,7 +157,6 @@ map.on('click', function(e) {
 });
 map.on('click', 'mapillary', function (e) {
     var coordinates = e.features[0].geometry.coordinates.slice();
-    console.log(e.features[0]);
     var imagekey = e.features[0].properties.key;
 
     // Ensure that if the map is zoomed out such that multiple
@@ -175,7 +184,6 @@ map.on('click', 'mapillary', function (e) {
     mapview.on(Mapillary.Viewer.nodechanged, function (node) {
         var lnglat = [node.latLon.lon, node.latLon.lat];
         popup.setLngLat(lnglat);
-        console.log(lnglat);
     });
 });
 
