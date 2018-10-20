@@ -64,7 +64,7 @@ map.on('load', function () {
         "paint": {
             "circle-color": "#34AF6E"
         }
-    });
+    }, 'hiltaba-accommodation');
     map.setLayoutProperty("mapillary", "visibility", "visible");
     map.setLayoutProperty("reception", "visibility", "visible");
     // add menu functions
@@ -146,12 +146,18 @@ map.on('mouseenter', 'hiltaba-accommodation', function () {
 map.on('mouseenter', 'hiltaba-walks-drives', function () {
     map.getCanvas().style.cursor = 'pointer';
 });
+map.on('mouseenter', 'mapillary', function () {
+    map.getCanvas().style.cursor = 'pointer';
+});
 
 // Change it back to a pointer when it leaves.
 map.on('mouseleave', 'hiltaba-accommodation', function () {
     map.getCanvas().style.cursor = '';
 });
 map.on('mouseleave', 'hiltaba-walks-drives', function () {
+    map.getCanvas().style.cursor = '';
+});
+map.on('mouseleave', 'mapillary', function () {
     map.getCanvas().style.cursor = '';
 });
 
