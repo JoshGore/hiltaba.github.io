@@ -1,12 +1,10 @@
 // custom control
-console.log(this);
 class HomeControl {
     constructor(bounds) {
         this._bounds = bounds;
     }
     onAdd(map) {
         this._map = map;
-        console.log(this);
         this._container = document.createElement('div');
         this._container.className = 'mapboxgl-ctrl mapboxgl-ctrl-group';
         var button = document.createElement('button');
@@ -14,7 +12,6 @@ class HomeControl {
         button.className = "mapboxgl-ctrl-icon";
         icon.className = "fas fa-home";
         button.appendChild(icon);
-        console.log(bounds);
         button.addEventListener('click', () => this._map.fitBounds(this._bounds));
         this._container.appendChild(button);//, () => this._map.fitBounds([[32.958984, -5.353521], [43.50585, 5.615985]]));
         // this._container.appendChild('<i class="fas fa-home"></i>', 'Return Home');//, () => this._map.fitBounds([[32.958984, -5.353521], [43.50585, 5.615985]]));
@@ -255,7 +252,6 @@ $('#map-menu-toggle').on('click', function() {
     if (document.getElementById("controlsContainer").hidden) {
         document.getElementById("main-map-menu").style.width = "300px";
         document.getElementById("map-menu-toggle-icon").style.transform = "rotateZ(180deg)";
-        console.log(document.getElementById("map-menu-toggle-icon").style.transform);
         setTimeout(function() {
             document.getElementById("controlsContainer").hidden = false;
         }, 300)
@@ -264,7 +260,6 @@ $('#map-menu-toggle').on('click', function() {
         document.getElementById("controlsContainer").hidden = true;
         document.getElementById("main-map-menu").style.width = "30px";
         document.getElementById("map-menu-toggle-icon").style.transform = "rotateZ(0deg)";
-        console.log(document.getElementById("map-menu-toggle-icon").style.transform);
     }
 });
 
