@@ -21,6 +21,39 @@
 
     <!-- Custom CSS (home to avoid breaking, for now) -->
     <link rel="stylesheet" href="/assets/css/home.css" />
+	<style>
+		body, html {
+			height: 100%;
+		}
+
+		header {
+            position: relative;
+            background-color: black;
+            background-image: url("/assets/images/general/maps_header.jpg");
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 60vh;
+            min-height: 25rem;
+            width: 100%;
+            overflow: hidden;
+		}
+
+		header .container {
+		    position: relative;
+		    z-index: 2;
+		}
+
+		header .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 1;
+		}
+	</style>
 
 </head>
 <body>
@@ -61,7 +94,7 @@
                         <a class="nav-link" href="/accommodation">Accommodation</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/maps">Offline Maps</a>
+                        <a class="nav-link active" href="/maps">Itinerary and Maps</a>
                     </li>
                 </ul>
             </div>
@@ -72,7 +105,7 @@
         </div>
         <div class="container h-100">
             <div class="d-flex text-center h-100">
-                <div class="my-auto w-100 text-white">
+                <div class="my-auto w-100">
                     <h1 class="display-3">Maps</h1>
                     <h2>Download offline maps of Hiltaba</h2>
                 </div>
