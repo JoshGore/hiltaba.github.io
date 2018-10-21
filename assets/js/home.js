@@ -40,13 +40,13 @@ var map = new mapboxgl.Map({
     center: [135.248, -32.229],
     zoom: 10.0
 });
-map.fitBounds(bounds);
 // var nav = new mapboxgl.NavigationControl();
 map.addControl(new mapboxgl.NavigationControl(), 'bottom-left');
 map.addControl(new HomeControl(bounds), 'bottom-left');
 // specify sources
 map.on('load', function () {
     // add mapillary layer
+    map.fitBounds(bounds);
     map.addLayer({
         "id": "mapillary",
         // type so can use custom symbol
